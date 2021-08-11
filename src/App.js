@@ -1,17 +1,21 @@
-import React from "react"
-import './App.css';
-import { useTranslation } from "react-i18next"
+import React, { useCallback } from "react";
+import "./App.css";
+import { useTranslation } from "react-i18next";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 function App() {
-  const { t } = useTranslation()
+  const handle = useFullScreenHandle();
+
+  const { t } = useTranslation();
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          {t("welcome_msg")}
-        </p>
-      </header>
+      <p>{t("welcome_msg")}</p>
+      <button onClick={handle.enter}>Enter fullscreen</button>
+
+      <FullScreen handle={handle}>
+        <p>React full screen</p>
+      </FullScreen>
     </div>
   );
 }
